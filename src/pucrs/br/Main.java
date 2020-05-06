@@ -1,6 +1,7 @@
 package pucrs.br;
 
 import pucrs.br.reader.ReadTxt;
+import pucrs.br.structures.Maze;
 
 import javax.swing.*;
 
@@ -30,7 +31,10 @@ public class Main {
 
         //um switch simples para selecionar e já executar o teste escolhido
         switch (response) {
-            case ("lab10.txt") -> fileProcessor.readFileTxt("lab10");
+            case ("lab10.txt") -> {
+                Maze maze = new Maze(fileProcessor.readFileTxt("lab10"));
+                System.out.println(maze.imprimeLabirinto());
+            }
             case ("teste0.txt") -> fileProcessor.readFileTxt("teste1.txt");
             case ("teste1.txt") -> fileProcessor.readFileTxt("teste2.txt");
             case ("teste2.txt") -> fileProcessor.readFileTxt("teste3.txt");
