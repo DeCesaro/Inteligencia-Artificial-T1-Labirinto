@@ -1,4 +1,4 @@
-package pucrs.br.aestrela;
+package pucrs.br.astart;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
