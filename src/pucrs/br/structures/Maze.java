@@ -49,12 +49,25 @@ public class Maze {
         int qtd = 0;
         for (String[] lines : maze) {
             for (String line : lines) {
-                if (line.equals("0") || line.equals("B")) {
+                if (line.equals("0")) {
                     qtd++;
                 }
             }
         }
         return qtd;
+    }
+
+    /* Retorna a quantidade de buracos */
+    public int qtdHoles() {
+        int tamanho = 0;
+        for (String[] strings : maze) {
+            for (String string : strings) {
+                if (string.equals("B")) {
+                    tamanho++;
+                }
+            }
+        }
+        return tamanho;
     }
 
     /* Retorna a posição da saida */

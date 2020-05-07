@@ -1,5 +1,6 @@
 package pucrs.br;
 
+import pucrs.br.agent.Agent;
 import pucrs.br.reader.ReadTxt;
 import pucrs.br.structures.Maze;
 
@@ -33,7 +34,10 @@ public class Main {
         switch (response) {
             case ("lab10.txt") -> {
                 Maze maze = new Maze(fileProcessor.readFileTxt("lab10"));
-                System.out.println(maze.imprimeLabirinto());
+                Agent agent = new Agent();
+                agent.aplicarAG(maze, 1, 10);
+                agent.imprimeMatrizPopulacao();
+                //System.out.println(maze.imprimeLabirinto());
             }
             case ("teste0.txt") -> fileProcessor.readFileTxt("teste1.txt");
             case ("teste1.txt") -> fileProcessor.readFileTxt("teste2.txt");

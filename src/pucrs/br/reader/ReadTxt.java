@@ -9,7 +9,7 @@ public class ReadTxt {
 
     public String[][] readFileTxt(String lab) {
         String[][] vectorMaze = null;
-        System.out.print("\nConteúdo do labirinto:\n");
+        //System.out.print("\nConteúdo do labirinto:\n");
 
         try {
             FileReader arquivo = new FileReader("C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\PUCRS\\Inteligencia Artificial\\Inteligencia-Artificial-T1-Labirinto\\src\\pucrs\\br\\mazes\\" + lab + ".txt");
@@ -26,7 +26,7 @@ public class ReadTxt {
                 if(line == null) break;
                 String[] conteudo = line.split(" ");
                 for(int i = 0; i < size; i++){
-                    System.out.print("\nLinha: " + (cont+2) + " " + "conteudo(char): " + conteudo[i] + "\n");
+                    //System.out.print("\nLinha: " + (cont+2) + " " + "conteudo(char): " + conteudo[i] + "\n");
                     vectorMaze[cont][i] = conteudo[i];
                 }
                 cont++;
