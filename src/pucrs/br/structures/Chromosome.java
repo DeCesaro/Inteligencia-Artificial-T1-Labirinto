@@ -2,7 +2,7 @@ package pucrs.br.structures;
 
 import java.util.ArrayList;
 
-public class Chromosome {
+public class Chromosome implements Comparable<Chromosome> {
 
     private ArrayList<Double> genes = new ArrayList<Double>();
     public ArrayList<Path> path = new ArrayList<Path>();
@@ -64,6 +64,25 @@ public class Chromosome {
         toString.append("\nPontuacao: ").append(this.score).append("\n");
         toString.append("Path: ").append(this.printPath()).append("\n");
         return toString + "\n";
+    }
+
+    /**
+     * Method responsible for compare the fitness value between
+     * two different chromosomes
+     * @param otherChromosome
+     * @return
+     */
+    @Override
+    public int compareTo(Chromosome otherChromosome) {
+        if (this.score < otherChromosome.getScore()) {
+            return -1;
+        }
+
+        if (this.score > otherChromosome.getScore()) {
+            return 1;
+        }
+
+        return 0;
     }
 
 }

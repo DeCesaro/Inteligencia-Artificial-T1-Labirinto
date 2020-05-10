@@ -2,18 +2,24 @@ package pucrs.br.agent;
 
 import pucrs.br.structures.Chromosome;
 import pucrs.br.structures.Maze;
+import pucrs.br.structures.Path;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-import static pucrs.br.utils.Utils.rand100NumbersBetween0and1;
+import static pucrs.br.utils.Utils.randNumbersInterval0to100;
 
 public class Agent {
 
     private ArrayList<Chromosome> individuals = new ArrayList<Chromosome>();
-    public Maze maze = null;
-    public int population = 100;
-    public int mutation = 0;
-    public int sizeChromosome = 0;
+    private ArrayList<Chromosome> individualsIntermediate = new ArrayList<Chromosome>();
+    public static Path agent = new Path(0,0);
+    private Maze maze = null;
+    private final int maxGenerations = 1000;
+    private int population = 100;
+    private int mutation = 0;
+    private int sizeChromosome = 0;
+    private boolean isGoal;
 
     public Agent(){}
 
@@ -33,7 +39,7 @@ public class Agent {
         for(int i = 0; i < population; i++) {
             Chromosome chromosome = new Chromosome();
             for (int j = 0; j < tam; j++) {
-                gene = rand100NumbersBetween0and1();
+                gene = randNumbersInterval0to100();
                 chromosome.addGene(gene);
             }
             this.individuals.add(chromosome);
@@ -50,4 +56,47 @@ public class Agent {
         }
     }
 
+    /**
+     * Method responsible for ordering population by chromosome fitness value
+     * @param individuals ArrayList<Chromosome>
+     * @return individuals
+     */
+    private ArrayList<Chromosome> sort(ArrayList<Chromosome> individuals) {
+        Collections.sort(individuals);
+
+        return individuals;
+    }
+
+    public void aplicarAptidao(){
+        String[][] campo = maze.getMaze();
+        int index = 0;
+        for (Chromosome chromosome : this.individuals) {
+            index++;
+            System.out.println(chromosome.toString());
+            //TODO: fazer apitidao
+        }
+    }
+
+
+
+
+    public ArrayList<Chromosome> getIndividuals() {
+        return individuals;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public int getMutation() {
+        return mutation;
+    }
+
+    public int getSizeChromosome() {
+        return sizeChromosome;
+    }
+
+    public boolean isGoal() {
+        return isGoal;
+    }
 }

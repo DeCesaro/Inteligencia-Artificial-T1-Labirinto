@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Utils {
 
-    public static double rand100NumbersBetween0and1() {
+    public static double randNumbersInterval0to100() {
         double min = 1;
         double max = 100;
 
