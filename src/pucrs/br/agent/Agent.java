@@ -11,15 +11,17 @@ import static pucrs.br.utils.Utils.randNumbersInterval0to100;
 
 public class Agent {
 
+    private final String[] moves = {"Norte", "Sul", "Leste", "Oeste", "Noroeste", "Nordeste", "Sudeste", "Sudoeste"};
     private ArrayList<Chromosome> individuals = new ArrayList<Chromosome>();
     private ArrayList<Chromosome> individualsIntermediate = new ArrayList<Chromosome>();
     public static Path agent = new Path(0,0);
     private Maze maze = null;
     private final int maxGenerations = 1000;
     private int population = 100;
-    private int mutation = 0;
+    private double mutation = 1;
     private int sizeChromosome = 0;
     private boolean isGoal;
+    private int cont = 0;
 
     public Agent(){}
 
@@ -27,10 +29,18 @@ public class Agent {
         this.population = population;
         this.maze = maze;
         System.out.println("\nIniciando Algoritmo Genético...\n");
-        criarPopulacaoInicial(this.maze.qtdFreeFields(), valueMut);
+        createPopulation0(this.maze.qtdFreeFields(), valueMut);
+
+        while(cont < population ) {
+            System.out.println("\nGERAÇÃO : " + cont );
+            applySelectionBasic();
+            this.individuals = this.individualsIntermediate;
+            this.individualsIntermediate = new ArrayList<Chromosome>();
+            cont++;
+        }
     }
 
-    public void criarPopulacaoInicial(int tam, int valueMut){
+    public void createPopulation0(int tam, int valueMut){
         System.out.println("\nCriando Populacao Inicial...\n");
         double gene;
         System.out.println("Tamanho: "+tam);
@@ -45,7 +55,7 @@ public class Agent {
             this.individuals.add(chromosome);
             //System.out.println(chromosome.toString());
         }
-        this.mutation = ((tam * population)*valueMut)/100;
+        this.mutation = Double.parseDouble(String.valueOf(((tam * population)*valueMut)/100));
         System.out.println("Mutacao: " + this.mutation);
     }
 
@@ -69,16 +79,42 @@ public class Agent {
 
     public void aplicarAptidao(){
         String[][] campo = maze.getMaze();
-        int index = 0;
         for (Chromosome chromosome : this.individuals) {
-            index++;
             System.out.println(chromosome.toString());
             //TODO: fazer apitidao
         }
     }
 
+    public void applySelectionBasic() {
+        System.out.println("Aplicando seleção");
+        ArrayList<Chromosome> melhores = new ArrayList<>();
+        for(int i = 0; i < 4; i++) {
+            melhores.add(this.individuals.get(i));
+        }
+        for(int i = 4; i < this.individuals.size(); i++) {
+            for(int j = 0; j < melhores.size(); j++) {
+                if(this.individuals.get(i).getScore() > melhores.get(j).getScore()) {
+                    melhores.remove(j);
+                    melhores.add(this.individuals.get(i));
+                }
+            }
+        }
+        this.individualsIntermediate = melhores;
+        for (Chromosome chromosome : this.individualsIntermediate) {
+            //System.out.println(i + ". Pontuação: " + this.individuosIntermediario.get(i).pontuacao);
+            //System.out.println("" + this.individuosIntermediario.get(i).printPath());
+            System.out.println(chromosome.toString());
+        }
+    }
 
+    public static void walkOnMaze(){
+        //TODO: Fazer agent caminhar, porém tem que criar vários agentes ao mesmo tempo nesta classe...
+    }
 
+    public static void setAgentPath(int x, int y) {
+        agent.x = x;
+        agent.y = y;
+    }
 
     public ArrayList<Chromosome> getIndividuals() {
         return individuals;
@@ -88,7 +124,7 @@ public class Agent {
         return population;
     }
 
-    public int getMutation() {
+    public double getMutation() {
         return mutation;
     }
 
@@ -98,5 +134,9 @@ public class Agent {
 
     public boolean isGoal() {
         return isGoal;
+    }
+
+    public void setIndividuals(ArrayList<Chromosome> individuals) {
+        this.individuals = individuals;
     }
 }

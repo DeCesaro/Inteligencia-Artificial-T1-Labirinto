@@ -35,8 +35,9 @@ public class Main {
             case ("lab10.txt") -> {
                 Maze maze = new Maze(fileProcessor.readFileTxt("lab10"));
                 Agent agent = new Agent();
-                agent.aplicarAG(maze, 1, 10);
-                agent.imprimeMatrizPopulacao();
+                agent.aplicarAG(maze, 1, 100);
+                //agent.imprimeMatrizPopulacao();
+
                 //System.out.println(maze.imprimeLabirinto());
             }
             case ("teste0.txt") -> fileProcessor.readFileTxt("teste1.txt");

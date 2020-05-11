@@ -70,7 +70,7 @@ public class Chromosome implements Comparable<Chromosome> {
      * Method responsible for compare the fitness value between
      * two different chromosomes
      * @param otherChromosome
-     * @return
+     * @return int
      */
     @Override
     public int compareTo(Chromosome otherChromosome) {
