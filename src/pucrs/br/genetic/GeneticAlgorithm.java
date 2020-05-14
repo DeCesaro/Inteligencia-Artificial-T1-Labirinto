@@ -1,4 +1,9 @@
-package pucrs.br;
+package pucrs.br.genetic;
+
+import pucrs.br.structures.Individual;
+import pucrs.br.structures.Population;
+import pucrs.br.agent.Agent;
+import pucrs.br.structures.maze.Maze;
 
 import java.util.Random;
 
@@ -29,8 +34,7 @@ public class GeneticAlgorithm {
      */
     public Population initPopulation(int chromosomeLength) {
         // Initialize population
-        Population population = new Population(this.populationSize, chromosomeLength);
-        return population;
+        return new Population(this.populationSize, chromosomeLength);
     }
 
     /** Calculate fitness for an individual.
@@ -50,7 +54,7 @@ public class GeneticAlgorithm {
         int[] chromosome = individual.getChromosome();
 
         // Get fitness
-        Robot robot = new Robot(chromosome, maze, 150);
+        Agent robot = new Agent(chromosome, maze, 150);
         robot.run();
 
         int fitness = robot.moves;
@@ -212,8 +216,7 @@ public class GeneticAlgorithm {
 
     private static int randInt(int min, int max){
         Random rand = new Random();
-        int randomNum = rand.nextInt((max-min)+1)+min;
-        return randomNum;
+        return rand.nextInt((max-min)+1)+min;
     }
 
 }

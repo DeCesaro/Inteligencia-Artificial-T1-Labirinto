@@ -1,4 +1,8 @@
-package pucrs.br;
+package pucrs.br.interfaces;
+
+import pucrs.br.genetic.GeneticAlgorithm;
+import pucrs.br.structures.Population;
+import pucrs.br.structures.maze.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,11 +26,11 @@ public class GUI {
     
 
     private final ImageIcon startIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/Icons/start.png")));
+            "/pucrs/br/interfaces/icons/start.png")));
     private final ImageIcon goalIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/Icons/goal.png")));
+            "/pucrs/br/interfaces/icons/goal.png")));
     private final ImageIcon legendIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/Icons/legend.png")));
+            "/pucrs/br/interfaces/icons/legend.png")));
     private JFrame mainFrame;//main window
     private MazeDisplay mazeDisplay;//displays maze
     private boolean saved;//maze saved
@@ -311,12 +315,12 @@ public class GUI {
                 speedSlider.setValue((Integer)speedSpinner.getValue());
             }
         });
-        
-        
+
+
         Hashtable labelTable = new Hashtable();
-        labelTable.put( new Integer(0), new JLabel("0") );
-        labelTable.put( new Integer(1000), new JLabel("1000"));
-        labelTable.put( new Integer(2000), new JLabel("2000"));
+        labelTable.put(0, new JLabel("0") );
+        labelTable.put(1000, new JLabel("1000"));
+        labelTable.put(2000, new JLabel("2000"));
         speedSlider.setLabelTable( labelTable );
         speedSlider.addChangeListener(new ChangeListener() {
 

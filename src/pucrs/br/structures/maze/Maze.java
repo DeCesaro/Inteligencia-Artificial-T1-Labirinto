@@ -1,4 +1,4 @@
-package pucrs.br;
+package pucrs.br.structures.maze;
 
 import java.awt.Point;
 import java.io.File;
@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Maze {
-    
+
     private int rows;//rows of this maze
     private int columns;//columns of this maze
+    private int size;
     private MazeCell[][] mazeLogic;//maze data
     private int[][] maze;
     private int startX;
@@ -34,8 +35,8 @@ public class Maze {
         solution = null;
     }
 
-    
-    
+
+
     /**
      * Builds a new empty maze of specific dimensions
      * @param rows number of rows in the maze
@@ -55,62 +56,64 @@ public class Maze {
         current = null;
         solution = null;
     }
-    
 
-    
+
+
     /**
      * Builds a new maze from file
      * @param path file path
      */
     public Maze (String path){
         this();
-        try (Scanner scanner = new Scanner(new File(path))){
-            int input;
-            int rows = scanner.nextInt();
-            int columns = scanner.nextInt();
-            this.rows = rows;
-            this.columns = columns;
-            
+        try {
+            Scanner scanner = new Scanner(new File(path));
+            System.out.println("Chegando esse arquivo "+path );
+            String input;
+            int size = scanner.nextInt();
+            this.rows = size;
+            this.columns = size;
+            System.out.println("Tamanho: "+size);
             mazeLogic = new MazeCell[rows][columns];
             for (int i = 0;i< rows;i++){
                 for (int j = 0;j< columns;j++){
                     mazeLogic[i][j] = new MazeCell();
                 }
             }
-            
             for (int i = 0;i< rows;i++){
                 for (int j = 0;j< columns;j++){
-                    if (scanner.hasNextInt()){
-                        input = scanner.nextInt();
-                        if (input == 0){
-                            mazeLogic[i][j].setIsObstacle(false);
-                            mazeLogic[i][j].setIsHole(false);
-                        }
-                        else if (input == 2){
-                            mazeLogic[i][j].setIsObstacle(false);
-                            start = new Point(i, j);
-                        }
-                        else if (input == 3){
-                            mazeLogic[i][j].setIsObstacle(false);
-                            goal = new Point(i, j);
-                        }
-                        else if (input == 1){
-                            mazeLogic[i][j].setIsObstacle(true);
-                        }
-                        else {
-                            mazeLogic[i][j].setIsHole(true);
+                    if (scanner.hasNext()){
+                        input = scanner.next();
+                        switch (input) {
+                            case "0" -> {
+                                mazeLogic[i][j].setIsObstacle(false);
+                                mazeLogic[i][j].setIsHole(false);
+                            }
+                            case "E" -> {
+                                mazeLogic[i][j].setIsObstacle(false);
+                                start = new Point(i, j);
+                            }
+                            case "S" -> {
+                                mazeLogic[i][j].setIsObstacle(false);
+                                goal = new Point(i, j);
+                            }
+                            case "1" -> {
+                                mazeLogic[i][j].setIsObstacle(true);
+                            }
+                            default -> {
+                                mazeLogic[i][j].setIsHole(true);
+                            }
                         }
                     }
                 }
             }
 
-            
-            
+
+
         } catch (IOException e) {
             System.out.println("Input issue!");
         }
     }
-    
+
     /**
      * Saves this maze to a text file
      * @param path file path
@@ -120,27 +123,27 @@ public class Maze {
 
         try (PrintWriter printer = new PrintWriter(new FileWriter(new File(path)) {
         })) {
-            
-            
+
+
             printer.println(rows);
             printer.println(columns);
-            
-            
-            
-            
+
+
+
+
             for (int i = 0;i< rows;i++){
                 for (int j = 0;j< columns;j++){
                     if (start != null && start.x == i && start.y == j){
-                        printer.print("1 ");
+                        printer.print("E ");
                     }
                     else if (goal != null && goal.x == i && goal.y == j){
-                        printer.print("2 ");
+                        printer.print("S ");
                     }
                     else if (mazeLogic[i][j].isObstacle()){
-                        printer.print("3 ");
+                        printer.print("1 ");
                     }
                     else if(mazeLogic[i][j].isHole()){
-                        printer.print("4");
+                        printer.print("B");
                     }
                     else{
                         printer.print("0");
@@ -148,7 +151,7 @@ public class Maze {
                 }
                 printer.println();
             }
-            
+
         } catch (Exception e) {
             System.out.println("Output issue!");
             return false;
@@ -157,8 +160,8 @@ public class Maze {
 
         return true;
     }
-    
-    
+
+
     /**
      * Set if a cell is obstacle
      * @param x row
@@ -195,7 +198,7 @@ public class Maze {
             start = new Point(x, y);
         }
     }
-    
+
     /**
      * Set goal of this maze
      * @param x row 
@@ -210,7 +213,7 @@ public class Maze {
             goal = new Point(x, y);
         }
     }
-    
+
     /**
      * gets rows
      * @return rows
@@ -218,7 +221,7 @@ public class Maze {
     public int getRows(){
         return rows;
     }
-    
+
     /**
      * gets columns
      * @return columns
@@ -250,7 +253,7 @@ public class Maze {
     public MazeCell[][] getMazeLogic(){
         return mazeLogic;
     }
-    
+
     /**
      * gets maze start
      * @return maze start
@@ -258,7 +261,7 @@ public class Maze {
     public Point getStart(){
         return start;
     }
-    
+
     /**
      * gets maze goal
      * @return maze goal
@@ -289,7 +292,7 @@ public class Maze {
     public void setSolution(ArrayList<MazeCell> solution) {
         this.solution = solution;
     }
-    
+
     /**
      * Sets all cells as obstacles
      */
@@ -302,7 +305,7 @@ public class Maze {
         start = null;
         goal = null;
     }
-    
+
     /**
      * Clears this maze
      */
@@ -329,15 +332,15 @@ public class Maze {
     public void setStart(Point newStartPoint){
         start = newStartPoint;
     }
-    
+
     public void setGoal(Point newGoalPoint){
         goal = newGoalPoint;
     }
-    
+
         public ArrayList<MazeCell> getSolution() {
         return solution;
     }
-        
+
     public Point getCurrent() {
         return current;
     }
@@ -345,7 +348,7 @@ public class Maze {
     public void setCurrent(Point current) {
         this.current = current;
     }
-    
+
     public void copyMazeObstacles(Maze otherMaze, int iStart, int jStart){
         for (int i = 0;i< rows;i++){
             for (int j = 0;j< columns;j++){
@@ -361,7 +364,7 @@ public class Maze {
         }
         if (otherMaze.getStart() != null && start == null){
             start = new Point(otherMaze.getStart().x, otherMaze.getStart().y);
-            
+
         }
         else if (otherMaze.getStart() == null){
             start = null;
@@ -401,8 +404,8 @@ public class Maze {
             goal = null;
         }
     }
-    
-    
+
+
     public void addRow(Maze oldMaze){
         rows++;
         mazeLogic = new MazeCell[rows][columns];
@@ -414,7 +417,7 @@ public class Maze {
         copyMazeObstacles(oldMaze, 0, 0);
         copyMazeHoles(oldMaze, 0, 0);
     }
-    
+
     public void addColumn(Maze oldMaze){
         columns++;
         mazeLogic = new MazeCell[rows][columns];
@@ -426,7 +429,7 @@ public class Maze {
         copyMazeObstacles(oldMaze, 0, 0);
         copyMazeHoles(oldMaze, 0, 0);
     }
-    
+
     public void removeRow(){
         Maze temp = new Maze(rows, columns);
         temp.copyMazeObstacles(this, 0, 0);
@@ -449,7 +452,7 @@ public class Maze {
         copyMazeObstacles(temp, 0, 0);
         copyMazeHoles(temp, 0,0);
     }
-    
+
     public void removeColumn(){
         Maze temp = new Maze(rows, columns);
         temp.copyMazeObstacles(this, 0, 0);

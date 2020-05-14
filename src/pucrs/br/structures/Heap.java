@@ -1,4 +1,4 @@
-package pucrs.br;
+package pucrs.br.structures;
 
 /*
 Binary Min Heap

@@ -1,4 +1,4 @@
-package pucrs.br;
+package pucrs.br.structures.maze;
 
 import java.awt.Point;
 import java.util.ArrayList;

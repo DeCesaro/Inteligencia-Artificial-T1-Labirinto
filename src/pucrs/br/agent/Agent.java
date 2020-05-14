@@ -1,26 +1,29 @@
-package pucrs.br;
+package pucrs.br.agent;
 
-public class Robot {
+import pucrs.br.structures.maze.Maze;
+import pucrs.br.structures.maze.MazeCell;
+
+public class Agent {
     private int xPosition;
     private int yPosition;
-    int maxMoves;
-    int moves;
+    public int maxMoves;
+    public int moves;
     private int[] directions;
     private Maze maze;
     private MazeCell[][] mazeLogic;
-    int[][] copymaze;
+    public int[][] copymaze;
     private int currentX;
     private int currentY;
-    int step;
+    public int step;
 
     /**
-     * Initalize a robot with controller
+     * Initalize a agent with controller
      *
-     * @param directions The directions that robot have to follow
-     * @param maze       The maze the robot will use
-     * @param maxMoves   The maximum number of moves the robot can make
+     * @param directions The directions that agent have to follow
+     * @param maze       The maze the agent will use
+     * @param maxMoves   The maximum number of moves the agent can make
      */
-    public Robot(int[] directions, Maze maze, int maxMoves) {
+    public Agent(int[] directions, Maze maze, int maxMoves) {
         this.maze = maze;
         this.copymaze = new int[maze.getMazeLogic().length][maze.getMazeLogic()[0].length];
         this.maxMoves = maxMoves;
@@ -35,7 +38,7 @@ public class Robot {
     }
 
     /**
-     * Runs the robot's actions based on directions
+     * Runs the agent's actions based on directions
      */
     public void run() {
         while (true) {
@@ -53,7 +56,7 @@ public class Robot {
                 return;
             }
 
-            // Run action. Break if robot is destroyed.
+            // Run action. Break if agent is destroyed.
             if (this.makeNextAction() == -1) {
                 return;
             }
@@ -63,14 +66,15 @@ public class Robot {
 
 
     /**
-     * Runs the next action and check if robot is destroyed
+     * Runs the next action and check if agent is destroyed
      */
     public int makeNextAction() {
         int rcode = 0;
         // gets the next direction
         int what_direction = getNextAction();
         switch (what_direction) {
-            case 1: // If move up
+            // If move up
+            case 1 -> {
                 currentX = currentX - 1;
                 if (maze.isWall(currentX, currentY)) {
                     rcode = -1;
@@ -81,8 +85,9 @@ public class Robot {
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-                break;
-            case 2: // If move left
+            }
+            // If move left
+            case 2 -> {
                 currentY = currentY - 1;
                 if (maze.isWall(currentX, currentY)) {
                     rcode = -1;
@@ -93,8 +98,9 @@ public class Robot {
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-                break;
-            case 3: // If move right
+            }
+            // If move right
+            case 3 -> {
                 currentY = currentY + 1;
                 if (maze.isWall(currentX, currentY)) {
                     rcode = -1;
@@ -105,8 +111,9 @@ public class Robot {
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-                break;
-            case 4: // If move down
+            }
+            // If move down
+            case 4 -> {
                 currentX = currentX + 1;
                 if (maze.isWall(currentX, currentY)) {
                     rcode = -1;
@@ -117,7 +124,7 @@ public class Robot {
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-                break;
+            }
         }
 
         return rcode;

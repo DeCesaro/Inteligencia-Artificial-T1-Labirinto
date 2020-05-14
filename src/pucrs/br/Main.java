@@ -1,5 +1,7 @@
 package pucrs.br;
 
+import pucrs.br.interfaces.GUI;
+
 /**
  * Nomes: Bernardo de Cesaro e Gustavo Possebon
  * Pontifícia Universidade Católica do Rio Grande do Sul
@@ -9,6 +11,8 @@ package pucrs.br;
 
 public class Main{
     public static void main(String[] args) {
-        GUI testGui = new GUI();//set up GUI
+
+
+        GUI testGui = new GUI();    //set up GUI
     }
 }

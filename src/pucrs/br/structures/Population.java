@@ -1,4 +1,6 @@
-package pucrs.br;
+package pucrs.br.structures;
+
+import pucrs.br.structures.Individual;
 
 import java.util.Arrays;
 import java.util.Comparator;

@@ -1,4 +1,4 @@
-package pucrs.br;
+package pucrs.br.structures.maze;
 
 import java.awt.Rectangle;
 
@@ -60,7 +60,7 @@ public class MazeCell implements Comparable<MazeCell>{
         return isVisited;
     }
     
-        public boolean isSolution() {
+    public boolean isSolution() {
         return solution;
     }
 
@@ -77,5 +77,6 @@ public class MazeCell implements Comparable<MazeCell>{
     public void setIsFront(boolean isFront) {
         this.front = isFront;
     }
-    
+
+
 }

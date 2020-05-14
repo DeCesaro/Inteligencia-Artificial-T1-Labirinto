@@ -1,4 +1,4 @@
-package pucrs.br;
+package pucrs.br.structures.maze;
 
 
 import javax.swing.*;
