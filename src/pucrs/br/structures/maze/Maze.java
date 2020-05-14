@@ -46,9 +46,11 @@ public class Maze {
         this.rows = rows;
         this.columns = columns;
         mazeLogic = new MazeCell[rows][columns];
+        maze = new int[rows][columns];
         for (int i = 0;i< rows;i++){
             for (int j = 0;j< columns;j++){
                 mazeLogic[i][j] = new MazeCell();
+                maze[i][j] = 0;
             }
         }
         start = null;
@@ -73,10 +75,12 @@ public class Maze {
             this.rows = size;
             this.columns = size;
             System.out.println("Tamanho: "+size);
-            mazeLogic = new MazeCell[rows][columns];
+            mazeLogic = new MazeCell[size][size];
+            maze = new int[size][size];
             for (int i = 0;i< rows;i++){
                 for (int j = 0;j< columns;j++){
                     mazeLogic[i][j] = new MazeCell();
+                    maze[i][j] = 0;
                 }
             }
             for (int i = 0;i< rows;i++){
@@ -85,21 +89,26 @@ public class Maze {
                         input = scanner.next();
                         switch (input) {
                             case "0" -> {
+                                maze[i][j] = 0;
                                 mazeLogic[i][j].setIsObstacle(false);
                                 mazeLogic[i][j].setIsHole(false);
                             }
                             case "E" -> {
+                                maze[i][j] = 2;
                                 mazeLogic[i][j].setIsObstacle(false);
                                 start = new Point(i, j);
                             }
                             case "S" -> {
+                                maze[i][j] = 4;
                                 mazeLogic[i][j].setIsObstacle(false);
                                 goal = new Point(i, j);
                             }
                             case "1" -> {
+                                maze[i][j] = 1;
                                 mazeLogic[i][j].setIsObstacle(true);
                             }
                             default -> {
+                                maze[i][j] = 1;
                                 mazeLogic[i][j].setIsHole(true);
                             }
                         }
@@ -124,12 +133,7 @@ public class Maze {
         try (PrintWriter printer = new PrintWriter(new FileWriter(new File(path)) {
         })) {
 
-
             printer.println(rows);
-            printer.println(columns);
-
-
-
 
             for (int i = 0;i< rows;i++){
                 for (int j = 0;j< columns;j++){
@@ -143,11 +147,11 @@ public class Maze {
                         printer.print("1 ");
                     }
                     else if(mazeLogic[i][j].isHole()){
-                        printer.print("B");
+                        printer.print("B ");
                     }
                     else{
-                        printer.print("0");
-                        }
+                        printer.print("0 ");
+                    }
                 }
                 printer.println();
             }
@@ -337,7 +341,7 @@ public class Maze {
         goal = newGoalPoint;
     }
 
-        public ArrayList<MazeCell> getSolution() {
+    public ArrayList<MazeCell> getSolution() {
         return solution;
     }
 
@@ -358,7 +362,7 @@ public class Maze {
                 }
                 else{
                     mazeLogic[i][j].setIsObstacle(otherMaze.getMazeLogic()[i + iStart]
-                        [j + jStart].isObstacle());
+                            [j + jStart].isObstacle());
                 }
             }
         }
