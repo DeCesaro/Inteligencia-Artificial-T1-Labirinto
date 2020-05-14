@@ -1,20 +1,6 @@
-/**
- * This class abstracts a maze through which a robot will have to move. The
- * maze is represented as a 2d array of integers, with different environment
- * types represented by integers as follows:
- *
- * 0 = Empty
- * 1 = Wall
- * 2 = Starting position
- * 4 = Goal position
- *
- * References 'Genetic Algorithms in Java Basics' - Lee Jacobson, Burak Kanber
- *
- * @author Meriton Çela
- *
- */
+package pucrs.br.genetic.structures;
 
-public class Maze {
+public class MazeGenetic {
     private final int maze[][];
     private int startX;
     private int startY;
@@ -22,7 +8,7 @@ public class Maze {
     private int endY;
     private int freeSpaces;
 
-    public Maze(int maze[][]) {
+    public MazeGenetic(int maze[][]) {
         this.maze = maze;
         set_start_finish_positions();
         setFreeSpaces();

@@ -1,8 +1,6 @@
-package pucrs.br.AStarGUI;
+package pucrs.br.astar.interfaces;
 
-import pucrs.br.AStarGUI.structures.maze.*;
-
-import pucrs.br.AStarGUI.structures.maze.*;
+import pucrs.br.astar.structures.maze.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -26,11 +24,11 @@ public class GUI {
     
 
     private final ImageIcon startIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/AStarGUI/icons/start.png")));
+            "/pucrs/br/astar/icons/start.png")));
     private final ImageIcon goalIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/AStarGUI/icons/goal.png")));
+            "/pucrs/br/astar/icons/goal.png")));
     private final ImageIcon legendIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/AStarGUI/icons/legend.png")));
+            "/pucrs/br/astar/icons/legend.png")));
     private JFrame mainFrame;//main window
     private MazeDisplay mazeDisplay;//displays maze
     private boolean saved;//maze saved
@@ -266,7 +264,7 @@ public class GUI {
         
         JLabel algoLabel = new JLabel("Algoritmo");
         algoLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        String[] algorithms = {"Genético", "A*"};
+        String[] algorithms = {"A*"};
         JComboBox<String> algoSelection = new JComboBox<>(algorithms);
         algoSelection.setAlignmentX(Component.CENTER_ALIGNMENT);
         algoSelection.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));

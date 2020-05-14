@@ -1,4 +1,4 @@
-package pucrs.br.AStarGUI.structures.maze;
+package pucrs.br.astar.structures.maze;
 
 
 import javax.swing.*;
@@ -7,9 +7,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**Displays a maze as a colored grid
- *
- */
 
 public class MazeDisplay extends JPanel{
         private Point selection;//mouse selection

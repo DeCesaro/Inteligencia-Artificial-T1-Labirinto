@@ -1,6 +1,6 @@
-package pucrs.br.AStarGUI.structures.maze;
+package pucrs.br.astar.structures.maze;
 
-import pucrs.br.AStarGUI.structures.Heap;
+import pucrs.br.astar.structures.Heap;
 
 /**
  * Best-First / A* maze solver
@@ -17,7 +17,7 @@ public final class MazeSolverBF extends MazeSearch{
      * @param aStar true for A*, false for Best-First
      * @param hf true: manhattan, false: euclidean
      */
-    public MazeSolverBF(int mazeInput[][], boolean aStar, boolean hf, Maze mazeData) {
+    public MazeSolverBF(int[][] mazeInput, boolean aStar, boolean hf, Maze mazeData) {
         super(mazeInput, mazeData);
         front = new Heap<>();
         this.aStar = aStar;

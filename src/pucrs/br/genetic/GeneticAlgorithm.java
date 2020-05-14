@@ -1,17 +1,11 @@
+package pucrs.br.genetic;
+
+import pucrs.br.genetic.agent.Agent;
+import pucrs.br.genetic.structures.Individual;
+import pucrs.br.genetic.structures.MazeGenetic;
+import pucrs.br.genetic.structures.Population;
+
 import java.util.Random;
-
-/** This GeneticAlgorithm class is designed to solve the
- * "Robot Controller in a Maze" problem.
- *
- * This class introduces the concepts of tournament selection and single-point
- * crossover. Additionally, the calcFitness method count the number of Robot's moves,
- * in this case we actually have to evaluate how good the robot follows instructions and doesn't destroyed!
- *
- * References 'Genetic Algorithms in Java Basics' - Lee Jacobson, Burak Kanber
- *
- * @author Meriton Çela
- */
-
 
 public class GeneticAlgorithm {
 
@@ -45,31 +39,31 @@ public class GeneticAlgorithm {
 
     /** Calculate fitness for an individual.
      *
-     * This fitness calculation is made in that way, that count the Robot's moves. In
-     * this case we initialize a new Robot class, and evaluate its performance
-     * in the given maze.
+     * This fitness calculation is made in that way, that count the pucrs.br.genetic.agent.Agent's moves. In
+     * this case we initialize a new pucrs.br.genetic.agent.Agent class, and evaluate its performance
+     * in the given mazeGenetic.
      *
      * @param individual
      *            the individual to evaluate
-     * @param maze
-     *            the maze
+     * @param mazeGenetic
+     *            the mazeGenetic
      * @return double The fitness value for individual
      */
-    public double calcFitness(Individual individual, Maze maze) {
+    public double calcFitness(Individual individual, MazeGenetic mazeGenetic) {
         // Get individual's chromosome
         int[] chromosome = individual.getChromosome();
 
         // Get fitness
-        Robot robot = new Robot(chromosome, maze, 150);
-        robot.run();
+        Agent agent = new Agent(chromosome, mazeGenetic, 500);
+        agent.run();
 
-        int fitness = robot.moves;
+        int fitness = agent.moves;
 
         // Store fitness
         individual.setFitness(fitness);
 
-        // steps of robot
-        individual.setGoodGenes(robot.step);
+        // steps of agent
+        individual.setGoodGenes(agent.step);
 
         return fitness;
     }
@@ -84,16 +78,16 @@ public class GeneticAlgorithm {
      *
      * @param population
      *            the population to evaluate
-     * @param maze
-     *            the maze to evaluate each individual against.
+     * @param mazeGenetic
+     *            the mazeGenetic to evaluate each individual against.
      */
-    public void evalPopulation(Population population, Maze maze) {
+    public void evalPopulation(Population population, MazeGenetic mazeGenetic) {
         double populationFitness = 0;
 
         // Loop over population evaluating individuals and suming population
         // fitness
         for (Individual individual : population.getIndividuals()) {
-            populationFitness += this.calcFitness(individual, maze);
+            populationFitness += this.calcFitness(individual, mazeGenetic);
         }
 
         population.setPopulationFitness(populationFitness);
@@ -153,7 +147,7 @@ public class GeneticAlgorithm {
                     // Does this gene need mutation?
                     if (this.mutationRate > Math.random()) {
                         // Get new gene
-                        int newGene = randInt(1,4);
+                        int newGene = randInt(1,8);
                         // Mutate gene
                         individual.setGene(geneIndex, newGene);
                     }
@@ -177,8 +171,8 @@ public class GeneticAlgorithm {
      * Child  : AAAABBBBBB
      *
      * @param population
-     *            Population to crossover
-     * @return Population The new population
+     *            pucrs.br.genetic.structures.Population to crossover
+     * @return pucrs.br.genetic.structures.Population The new population
      */
     public Population crossoverPopulation(Population population) {
         // Create new population

@@ -1,25 +1,6 @@
-import java.util.Random;
+package pucrs.br.genetic.structures;
 
-/**
- * An "Individual" represents a single candidate solution. The core piece of
- * information about an individual is its "chromosome", which is an encoding of
- * a possible solution to the problem at hand. A chromosome can be a string, an
- * array, a list, etc -- in this class, the chromosome is an integer array.
- *
- * An individual position in the chromosome is called a gene, and these are the
- * atomic pieces of the solution that can be manipulated or mutated. When the
- * chromosome is a string, as in this case, each character or set of characters
- * can be a gene.
- *
- * An individual also has a "fitness" score; this is a number that represents
- * how good a solution to the problem this individual is. The meaning of the
- * fitness score will vary based on the problem at hand.
- *
- * References 'Genetic Algorithms in Java Basics' - Lee Jacobson, Burak Kanber
- *
- * @author Meriton Çela
- *
- */
+import java.util.Random;
 
 public class Individual {
     private int[] chromosome;
@@ -36,7 +17,7 @@ public class Individual {
 
     /** Initializes random individual.
      *
-     * The chromosome is made of 1s, 2s, 3s and 4s, presenting the directions of robot
+     * The chromosome is made of 1s, 2s, 3s and 4s, presenting the directions of agent
      * 1 - move up
      * 2 - move left
      * 3 - move right
@@ -48,7 +29,7 @@ public class Individual {
 
         this.chromosome = new int[chromosomeLength];
         for (int gene = 0; gene < chromosomeLength; gene++) {
-            int g = randInt(1,4);
+            int g = randInt(1,8);
             this.setGene(gene, g);
         }
     }
@@ -61,8 +42,7 @@ public class Individual {
      */
     private static int randInt(int min, int max){
         Random rand = new Random();
-        int randomNum = rand.nextInt((max-min)+1)+min;
-        return randomNum;
+        return rand.nextInt((max-min)+1)+min;
     }
 
     /** Gets individual's chromosome

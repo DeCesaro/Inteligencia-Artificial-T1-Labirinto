@@ -1,14 +1,12 @@
+package pucrs.br.genetic.interfaces;
+
 import javax.swing.*;
 import java.awt.*;
 
-/** DrawMaze draws a maze in a frame
-  *
-  * @author Meriton Çela
-  */
 public class DrawMaze extends JPanel {
     private int[][] maze;
 
-    DrawMaze(int[][] maze, String title){
+    public DrawMaze(int[][] maze, String title){
         this.maze = maze;
         JFrame f = new JFrame();
         f.getContentPane().add(this);
@@ -36,14 +34,13 @@ public class DrawMaze extends JPanel {
 
         for (int row = 0; row < maze.length; row++) {
             for (int col = 0; col < maze[0].length; col++) {
-                Color color;
-                switch (maze[row][col]) {
-                    case 1 : color = Color.BLACK; break;
-                    case 2 : color = Color.RED; break;
-                    case 4 : color = Color.BLUE; break;
-                    case 5 : color = Color.GREEN; break;
-                    default : color = Color.WHITE;
-                }
+                Color color = switch (maze[row][col]) {
+                    case 1 -> Color.BLACK;
+                    case 2 -> Color.RED;
+                    case 4 -> Color.BLUE;
+                    case 9 -> Color.GREEN;
+                    default -> Color.WHITE;
+                };
                 g.setColor(color);
                 g.fillRect(30 * col, 30 * row, 30, 30);
                 g.setColor(Color.BLACK);

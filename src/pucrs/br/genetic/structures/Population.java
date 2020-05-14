@@ -1,18 +1,10 @@
+package pucrs.br.genetic.structures;
+
+import pucrs.br.genetic.structures.Individual;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
-
-/**
- * A population is an abstraction of a collection of individuals. The population
- * class is generally used to perform group-level operations on its individuals,
- * such as finding the strongest individuals, collecting stats on the population
- * as a whole, and selecting individuals to mutate or crossover.
- *
- * References 'Genetic Algorithms in Java Basics' - Lee Jacobson, Burak Kanber
- *
- * @author Meriton Çela
- *
- */
 
 public class Population {
     private Individual[] population;
@@ -66,7 +58,7 @@ public class Population {
      * @param offset
      *            The offset of the individual you want, sorted by fitness. 0 is
      *            the strongest, population.length - 1 is the weakest.
-     * @return individual Individual at offset
+     * @return individual pucrs.br.genetic.structures.Individual at offset
      */
     public Individual getFittest(int offset) {
         // Order population by fitness

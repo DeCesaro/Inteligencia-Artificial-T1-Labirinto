@@ -1,10 +1,7 @@
-package pucrs.br.AStarGUI.structures.maze;
+package pucrs.br.astar.structures.maze;
 
 import java.awt.Rectangle;
 
-/**Individual maze cell
- *
- */
 public class MazeCell implements Comparable<MazeCell>{
 
     private boolean hole;

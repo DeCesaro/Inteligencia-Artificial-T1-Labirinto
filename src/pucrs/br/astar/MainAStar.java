@@ -1,6 +1,6 @@
-package pucrs.br.AStarGUI;
+package pucrs.br.astar;
 
-import pucrs.br.AStarGUI.GUI;
+import pucrs.br.astar.interfaces.GUI;
 
 /**
  * Nomes: Bernardo de Cesaro e Gustavo Possebon
@@ -9,7 +9,7 @@ import pucrs.br.AStarGUI.GUI;
  *
  */
 
-public class Main{
+public class MainAStar {
     public static void main(String[] args) {
 
 
