@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GeneticoGUI/GeneticoGUI.iml" filepath="$PROJECT_DIR$/GeneticoGUI/GeneticoGUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/Inteligencia-Artificial-T1-Labirinto.iml" filepath="$PROJECT_DIR$/Inteligencia-Artificial-T1-Labirinto.iml" />
     </modules>
   </component>

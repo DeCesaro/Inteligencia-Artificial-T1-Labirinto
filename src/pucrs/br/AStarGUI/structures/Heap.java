@@ -1,4 +1,4 @@
-package pucrs.br.structures;
+package pucrs.br.AStarGUI.structures;
 
 /*
 Binary Min Heap

@@ -1,4 +1,4 @@
-package pucrs.br.structures.maze;
+package pucrs.br.AStarGUI.structures.maze;
 
 
 import javax.swing.*;
@@ -485,7 +485,7 @@ public class MazeDisplay extends JPanel{
             Point pointerSelection = calculatePointerSelection();
             
             if (pointerSelection != null && editable){
-                if (selection.equals("S") && (aMaze.getGoal() == null || 
+                if (selection.equals("E") && (aMaze.getGoal() == null ||
                         !pointerSelection.equals(aMaze.getGoal()))){
                     aMaze.setStart(pointerSelection);
                     aMaze.getMazeLogic()[pointerSelection.x][pointerSelection.y].
@@ -498,10 +498,10 @@ public class MazeDisplay extends JPanel{
                 }
             }
             else if (editable){
-                if (selection.equals("S")){
+                if (selection.equals("E")){
                     aMaze.setStart(null);
                 }
-                else if (selection.equals("G")){
+                else if (selection.equals("S")){
                     aMaze.setGoal(null);
                 }
             }
@@ -600,7 +600,7 @@ public class MazeDisplay extends JPanel{
                                             setIsObstacle(true);
                                 }
                            else if (selection.equals(aMaze.getStart())){
-                               text = "S";
+                               text = "E";
                                JComponent c = (JComponent)e.getSource();
                                TransferHandler handler = c.getTransferHandler();
                                 handler.setDragImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
@@ -608,7 +608,7 @@ public class MazeDisplay extends JPanel{
                                 handler.exportAsDrag(c, e, TransferHandler.COPY);
                             }
                            else if (selection.equals(aMaze.getGoal())){
-                               text = "G";
+                               text = "S";
                                JComponent c = (JComponent)e.getSource();
                                TransferHandler handler = c.getTransferHandler();
                                 handler.setDragImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(

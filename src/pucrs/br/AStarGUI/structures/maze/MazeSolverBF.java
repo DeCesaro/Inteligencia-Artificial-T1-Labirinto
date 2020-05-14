@@ -1,6 +1,6 @@
-package pucrs.br.structures.maze;
+package pucrs.br.AStarGUI.structures.maze;
 
-import pucrs.br.structures.Heap;
+import pucrs.br.AStarGUI.structures.Heap;
 
 /**
  * Best-First / A* maze solver

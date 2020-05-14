@@ -1,4 +1,4 @@
-package pucrs.br.structures.maze;
+package pucrs.br.AStarGUI.structures.maze;
 
 import java.util.ArrayList;
 import java.util.Collections;

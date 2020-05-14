@@ -1,4 +1,4 @@
-package pucrs.br.structures.maze;
+package pucrs.br.AStarGUI.structures.maze;
 
 import java.awt.Rectangle;
 

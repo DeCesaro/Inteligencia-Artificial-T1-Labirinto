@@ -1,6 +1,6 @@
-package pucrs.br;
+package pucrs.br.AStarGUI;
 
-import pucrs.br.interfaces.GUI;
+import pucrs.br.AStarGUI.GUI;
 
 /**
  * Nomes: Bernardo de Cesaro e Gustavo Possebon

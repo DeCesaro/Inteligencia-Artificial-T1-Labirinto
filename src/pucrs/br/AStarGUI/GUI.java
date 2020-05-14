@@ -1,8 +1,8 @@
-package pucrs.br.interfaces;
+package pucrs.br.AStarGUI;
 
-import pucrs.br.genetic.GeneticAlgorithm;
-import pucrs.br.structures.Population;
-import pucrs.br.structures.maze.*;
+import pucrs.br.AStarGUI.structures.maze.*;
+
+import pucrs.br.AStarGUI.structures.maze.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -26,11 +26,11 @@ public class GUI {
     
 
     private final ImageIcon startIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/interfaces/icons/start.png")));
+            "/pucrs/br/AStarGUI/icons/start.png")));
     private final ImageIcon goalIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/interfaces/icons/goal.png")));
+            "/pucrs/br/AStarGUI/icons/goal.png")));
     private final ImageIcon legendIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-            "/pucrs/br/interfaces/icons/legend.png")));
+            "/pucrs/br/AStarGUI/icons/legend.png")));
     private JFrame mainFrame;//main window
     private MazeDisplay mazeDisplay;//displays maze
     private boolean saved;//maze saved
@@ -1078,10 +1078,6 @@ public class GUI {
         }
         else{
             manhattan = true;
-        }if (algorithm.equals("Genetico")){
-            GeneticAlgorithm ga = new GeneticAlgorithm(200, 0.12,0.9, 2, 10);
-            Population population = ga.initPopulation(150);
-            ga.evalPopulation(population, maze);
         }
         if (algorithm.equals("A*")){
             solver = new MazeSolverBF(mazeDisplay.getMazeData(), true,manhattan, mazeDisplay.getMaze());

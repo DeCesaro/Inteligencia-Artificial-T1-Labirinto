@@ -1,11 +1,16 @@
-package pucrs.br.genetic;
-
-import pucrs.br.structures.Individual;
-import pucrs.br.structures.Population;
-import pucrs.br.agent.Agent;
-import pucrs.br.structures.maze.Maze;
-
 import java.util.Random;
+
+/** This GeneticAlgorithm class is designed to solve the
+ * "Robot Controller in a Maze" problem.
+ *
+ * This class introduces the concepts of tournament selection and single-point
+ * crossover. Additionally, the calcFitness method count the number of Robot's moves,
+ * in this case we actually have to evaluate how good the robot follows instructions and doesn't destroyed!
+ *
+ * References 'Genetic Algorithms in Java Basics' - Lee Jacobson, Burak Kanber
+ *
+ * @author Meriton Çela
+ */
 
 
 public class GeneticAlgorithm {
@@ -34,7 +39,8 @@ public class GeneticAlgorithm {
      */
     public Population initPopulation(int chromosomeLength) {
         // Initialize population
-        return new Population(this.populationSize, chromosomeLength);
+        Population population = new Population(this.populationSize, chromosomeLength);
+        return population;
     }
 
     /** Calculate fitness for an individual.
@@ -54,7 +60,7 @@ public class GeneticAlgorithm {
         int[] chromosome = individual.getChromosome();
 
         // Get fitness
-        Agent robot = new Agent(chromosome, maze, 150);
+        Robot robot = new Robot(chromosome, maze, 150);
         robot.run();
 
         int fitness = robot.moves;
@@ -182,7 +188,7 @@ public class GeneticAlgorithm {
         for (int populationIndex = 0; populationIndex < population.size(); populationIndex++) {
             Individual parent1 = population.getFittest(populationIndex);
 
-            // Apply crossover to this individual
+            // Apply crossover to this individual?
             if (this.crossoverRate > Math.random() && populationIndex >= this.elitismCount) {
                 // Initialize offspring
                 Individual offspring = new Individual(parent1.getChromosomeLength());
@@ -216,7 +222,8 @@ public class GeneticAlgorithm {
 
     private static int randInt(int min, int max){
         Random rand = new Random();
-        return rand.nextInt((max-min)+1)+min;
+        int randomNum = rand.nextInt((max-min)+1)+min;
+        return randomNum;
     }
 
 }

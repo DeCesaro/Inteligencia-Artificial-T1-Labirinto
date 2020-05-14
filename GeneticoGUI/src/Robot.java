@@ -1,31 +1,35 @@
-package pucrs.br.agent;
 
-import pucrs.br.structures.maze.Maze;
-import pucrs.br.structures.maze.MazeCell;
-
-public class Agent {
+/**
+ * A robot abstraction. Give it a maze and an instruction set, and it will
+ * attempt to reach the finish.
+ *
+ * References 'Genetic Algorithms in Java Basics' - Lee Jacobson, Burak Kanber
+ *
+ * @author Meriton Çela
+ *
+ */
+public class Robot{
     private int xPosition;
     private int yPosition;
-    public int maxMoves;
-    public int moves;
+    int maxMoves;
+    int moves;
     private int[] directions;
     private Maze maze;
-    private MazeCell[][] mazeLogic;
-    public int[][] copymaze;
+    int[][] copymaze;
     private int currentX;
     private int currentY;
-    public int step;
+    int step;
 
     /**
-     * Initalize a agent with controller
+     * Initalize a robot with controller
      *
-     * @param directions The directions that agent have to follow
-     * @param maze       The maze the agent will use
-     * @param maxMoves   The maximum number of moves the agent can make
+     * @param directions The directions that robot have to follow
+     * @param maze The maze the robot will use
+     * @param maxMoves The maximum number of moves the robot can make
      */
-    public Agent(int[] directions, Maze maze, int maxMoves) {
+    public Robot(int[] directions, Maze maze, int maxMoves){
         this.maze = maze;
-        this.copymaze = new int[maze.getMazeLogic().length][maze.getMazeLogic()[0].length];
+        this.copymaze = new int[maze.getMaze().length][maze.getMaze()[0].length];
         this.maxMoves = maxMoves;
         xPosition = maze.getStartX();
         yPosition = maze.getStartY();
@@ -38,16 +42,16 @@ public class Agent {
     }
 
     /**
-     * Runs the agent's actions based on directions
+     * Runs the robot's actions based on directions
      */
-    public void run() {
-        while (true) {
+    public void run(){
+        while(true){
             this.moves++;
 
 
             // Break if we reach the goal
             if (this.maze.getPositionValue(this.currentX, this.currentY) == 4) {
-                moves = moves + 100;
+                moves = moves +100;
                 return;
             }
 
@@ -56,8 +60,8 @@ public class Agent {
                 return;
             }
 
-            // Run action. Break if agent is destroyed.
-            if (this.makeNextAction() == -1) {
+            // Run action. Break if robot is destroyed.
+            if (this.makeNextAction() == -1){
                 return;
             }
 
@@ -66,78 +70,73 @@ public class Agent {
 
 
     /**
-     * Runs the next action and check if agent is destroyed
+     * Runs the next action and check if robot is destroyed
      */
-    public int makeNextAction() {
+    public int makeNextAction(){
         int rcode = 0;
         // gets the next direction
         int what_direction = getNextAction();
-        switch (what_direction) {
-            // If move up
-            case 1 -> {
-                currentX = currentX - 1;
-                if (maze.isWall(currentX, currentY)) {
+        switch (what_direction){
+            case 1: // If move up
+                currentX = currentX -1;
+                if (maze.isWall(currentX,currentY)){
                     rcode = -1;
                     break;
                 }
-                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()) {
+                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()){
                     rcode = -1;
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-            }
-            // If move left
-            case 2 -> {
+                break;
+            case 2: // If move left
                 currentY = currentY - 1;
-                if (maze.isWall(currentX, currentY)) {
+                if (maze.isWall(currentX,currentY)){
                     rcode = -1;
                     break;
                 }
-                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()) {
+                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()){
                     rcode = -1;
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-            }
-            // If move right
-            case 3 -> {
+                break;
+            case 3: // If move right
                 currentY = currentY + 1;
-                if (maze.isWall(currentX, currentY)) {
+                if (maze.isWall(currentX,currentY)){
                     rcode = -1;
                     break;
                 }
-                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()) {
+                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()){
                     rcode = -1;
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-            }
-            // If move down
-            case 4 -> {
+                break;
+            case 4: // If move down
                 currentX = currentX + 1;
-                if (maze.isWall(currentX, currentY)) {
+                if (maze.isWall(currentX,currentY)){
                     rcode = -1;
                     break;
                 }
-                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()) {
+                if (currentX < 0 || currentY < 0 || currentX > maze.getMaxX() || currentY > maze.getMaxY()){
                     rcode = -1;
                     break;
                 }
                 copymaze[currentX][currentY] = 5;
-            }
+                break;
         }
 
         return rcode;
     }
 
-    /**
-     * Get next action depending on directions which has taken
+    /** Get next action depending on directions which has taken
      *
      * @return int Next action
      */
-    public int getNextAction() {
+    public int getNextAction(){
         int nxtA = this.directions[this.step];
-        this.step = step + 1;
+        this.step = step+1;
         return nxtA;
     }
 
@@ -146,8 +145,10 @@ public class Agent {
     public void setCopymaze(){
         for (int i = 0; i < copymaze.length; i++){
             for (int j = 0; j < copymaze[0].length;j++){
-                copymaze[i][j] = (int) maze.getPositionValue(i,j);
+                copymaze[i][j] = maze.getPositionValue(i,j);
             }
         }
     }
+
+
 }
